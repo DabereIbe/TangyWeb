@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.8.34511.84
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TangyWeb", "TangyWeb.csproj", "{6365D67A-6BE1-4F46-897D-640B2C1B95BA}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{6365D67A-6BE1-4F46-897D-640B2C1B95BA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6365D67A-6BE1-4F46-897D-640B2C1B95BA}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6365D67A-6BE1-4F46-897D-640B2C1B95BA}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6365D67A-6BE1-4F46-897D-640B2C1B95BA}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {168F4F88-BF33-4569-BEE5-BB9D70F11261}
+	EndGlobalSection
+EndGlobal
