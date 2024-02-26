@@ -1,0 +1,126 @@
+﻿@page "/LearnBlazor/BindProp"
+
+<h3 class="text-success">Individual Success</h3>
+<div class="row">
+<div class="col-6 border p-3">
+<h3 class="text-primary">Product Summary</h3><hr />
+Name: @product.Name<br />
+IsActive: @product.IsActive<br />
+Price: @product.Price<br />
+The Product is: @(product.IsActive? "Active":"Inactive")<br />
+Property Selected: @selectedProp
+<br />
+@if (!String.IsNullOrEmpty(selectedProp))
+{
+    <p>Property Value: @product.ProductProperties.FirstOrDefault(x => x.Key == selectedProp)</p>
+}
+</div>
+<br />
+
+<div class="col-6 border p-3">
+    <h3 class="text-primary">Product Playground</h3><hr />
+    <div>
+        Active: <input type="checkbox" @bind="product.IsActive" @bind:event="oninput" />
+    </div>
+    <div>
+        Price: <input type="number" @bind="product.Price" @bind:event="oninput" />
+    </div>
+
+    <div>
+Property Selected: <select @bind:event="oninput" @bind:get="selectedProp" @bind:set="OnInput">
+    @foreach (var prop in product.ProductProperties)
+    {
+        <option value="@prop.Key">@prop.Key</option>
+    }
+        </select>
+    </div>
+    </div>
+</div>
+
+<div class="row border p-3">
+    <h3 class="text-success">Product Table</h3>
+    @foreach (var item in Products)
+    {
+        <div class="col-4">
+            <input type="text" @bind="item.Name" @bind:event="" />
+        </div>
+        <div class="col-4">
+            <input type="number" @bind="item.Price" @bind:event="" />
+        </div>
+        <div class="col-4">
+            <input type="checkbox" @bind="item.IsActive" @bind:event="" />
+        </div>
+    }
+    
+</div>
+
+
+<div class="row border p-3">
+    <h3 class="text-black">Product Information</h3>
+    @foreach (var item in Products)
+    {
+        <p>
+            @item.Name [@item.Price] is : @(product.IsActive ? "Active" : "Inactive")
+        </p> 
+    <br />
+    }
+</div>
+@code {
+    private string? selectedProp;
+    private string? inputValue;
+
+    DemoProduct product = new()
+    {
+        Id = 1,
+        Name = "Track Shoes",
+        IsActive = true,
+        Price = 15.99,
+        ProductProperties = new List<DemoProduct_Prop>()
+        {
+            new DemoProduct_Prop{Id = 1, Key = "Colour", Value = "Black"},
+            new DemoProduct_Prop{Id = 2, Key = "Flavour", Value = "Rose Jasmine"},
+            new DemoProduct_Prop{Id = 3, Key = "Size", Value = "20oz"}
+        }
+    };
+
+    List<DemoProduct> Products = new();
+
+    protected override void OnInitialized()
+    {
+        Products.Add(
+            new DemoProduct
+            {
+                Id = 1,
+                Name = "Mdnight Blaze",
+                IsActive = true,
+                Price = 15.99,
+                ProductProperties = new List<DemoProduct_Prop>()
+                {
+                    new DemoProduct_Prop{Id = 1, Key = "Colour", Value = "Purple"},
+                    new DemoProduct_Prop{Id = 2, Key = "Flavour", Value = "Rose"},
+                    new DemoProduct_Prop{Id = 3, Key = "Size", Value = "20oz"}
+                }
+            });
+        Products.Add(
+        new DemoProduct
+            {
+                Id = 2,
+                Name = "Blossom Lily",
+                IsActive = true,
+                Price = 15.99,
+                ProductProperties = new List<DemoProduct_Prop>()
+                {
+                    new DemoProduct_Prop{Id = 1, Key = "Colour", Value = "White"},
+                    new DemoProduct_Prop{Id = 2, Key = "Flavour", Value = "Lily"},
+                    new DemoProduct_Prop{Id = 3, Key = "Size", Value = "18oz"}
+                }
+            });
+
+    }
+    private void OnInput(string? value)
+    {
+        var newValue = value ?? String.Empty;
+
+        selectedProp = newValue.Length > 4 ? "Long!" : newValue;
+    }
+}

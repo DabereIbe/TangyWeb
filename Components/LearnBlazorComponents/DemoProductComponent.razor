@@ -1,0 +1,43 @@
+﻿@* @foreach (var prod in Products)
+{
+    
+} *@
+<div class="bg-light border m-2 col-5" @onclick="(args)=>LastSelectedProduct(args, Products.Name)">
+    <h4 class="text-secondary">
+        Product - @Products.Id
+    </h4>
+    <input type="checkbox" @onchange="FavoritesUpdated" /> Add to Favourites<br />
+    Name: @Products.Name <br />
+    Show Properties: <input type="checkbox" value="@Products.IsActive" checked="@(Products.IsActive?"checked":null)" />
+    @if (Products.IsActive == true)
+    {
+        @foreach (var item in Products.ProductProperties)
+        {
+            <p>@item.Key - @item.Value</p>
+        }
+    }
+    <br />
+    <_EditDeleteButtons IsActive="@Products.IsActive">
+    </_EditDeleteButtons>
+</div>
+
+@code {
+    [Parameter]
+    public DemoProduct? Products { get; set; }
+
+    [Parameter]
+    public EventCallback<bool> OnFavoritesUpdated { get; set; }
+
+    [Parameter]
+    public EventCallback<string> OnLastSelectedProductUpdated { get; set; }
+
+    private async Task FavoritesUpdated(ChangeEventArgs e)
+    {
+        await OnFavoritesUpdated.InvokeAsync((bool)e.Value);
+    }
+
+    private async Task LastSelectedProduct(MouseEventArgs e, string Name)
+    {
+        await OnLastSelectedProductUpdated.InvokeAsync(Name);
+    }
+}
